@@ -15,7 +15,6 @@ public class User {
     private char role;
     private String firstName;
     private String lastName;
-    private String contactInfo;
 
     @OneToMany(mappedBy = "host")
     private List<Property> properties;

@@ -1,6 +1,8 @@
 package com.bead.rentonow.model;
 
 import lombok.Data;
+import lombok.Getter;
+
 import javax.persistence.*;
 import java.util.Date;
 

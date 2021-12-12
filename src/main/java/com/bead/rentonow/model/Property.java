@@ -17,7 +17,7 @@ public class Property {
     private BigDecimal price;
     private String description;
     private String Location;
-    private char paidStatus;
+    private String contactInfo;
 
     // To be converted to a Buffered Image / BLOB. Needs re-check/
     private byte[] imageBytes;
