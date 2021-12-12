@@ -21,5 +21,4 @@ public class Booking {
 
     @ManyToOne
     private Person guest;
-
 }
