@@ -16,18 +16,16 @@ public class Property {
 
     private BigDecimal price;
     private String description;
-    private String Location;
+    private String location;
     private String contactInfo;
+    private Date availableStartDate;
+    private Date availableEndDate;
 
     // To be converted to a Buffered Image / BLOB. Needs re-check/
     private byte[] imageBytes;
 
-    @ElementCollection
-    private List<Date> rentingDates;
-
     @ManyToOne
-    @JoinColumn(name = "host_id")
-    private User host;
+    private Person host;
 
     @OneToMany(mappedBy = "property")
     private List<Booking> bookings;

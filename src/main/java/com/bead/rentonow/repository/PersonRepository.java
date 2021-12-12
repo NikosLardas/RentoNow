@@ -1,10 +1,10 @@
 package com.bead.rentonow.repository;
 
-import com.bead.rentonow.model.Payment;
+import com.bead.rentonow.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Long> {
+public interface PersonRepository extends JpaRepository<Person, Long> {
 
 }

@@ -6,19 +6,18 @@ import java.util.List;
 
 @Data
 @Entity
-public class User {
+public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private char role;
-    private String firstName;
-    private String lastName;
+    private Role role;
+    private String fullName;
 
     @OneToMany(mappedBy = "host")
     private List<Property> properties;
 
-    @OneToMany(mappedBy = "host")
+    @OneToMany(mappedBy = "guest")
     private List<Booking> bookings;
 }

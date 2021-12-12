@@ -9,5 +9,4 @@ public class RentoNowApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RentoNowApplication.class, args);
 	}
-
 }

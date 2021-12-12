@@ -1,8 +1,6 @@
 package com.bead.rentonow.model;
 
 import lombok.Data;
-import lombok.Getter;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,18 +12,14 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date startDate;
-    private Date endDate;
+    private Date bookingStartDate;
+    private Date bookingEndDate;
+    private Boolean isPaid;
 
     @ManyToOne
-    @JoinColumn(name = "property_id")
     private Property property;
 
     @ManyToOne
-    @JoinColumn(name = "host_id")
-    private User host;
+    private Person guest;
 
-    @OneToOne
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
 }
