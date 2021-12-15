@@ -3,6 +3,7 @@ package com.bead.rentonow.model;
 import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +23,9 @@ public class Property {
     private Date availableStartDate;
     private Date availableEndDate;
 
-    // To be converted to a Buffered Image / BLOB. Needs re-check/
-    private byte[] imageBytes;
+    // Image possibly as a BLOB. Needs re-check/
+    @Lob
+    private Blob imageBlob;
 
     @ManyToOne
     private Person host;

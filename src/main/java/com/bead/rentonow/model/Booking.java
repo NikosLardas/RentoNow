@@ -14,7 +14,7 @@ public class Booking {
 
     private Date bookingStartDate;
     private Date bookingEndDate;
-    private Boolean isPaid;
+    private int isPaid; // Changed Boolean to int, as Boolean cannot be saved to DB.
 
     @ManyToOne
     private Property property;
