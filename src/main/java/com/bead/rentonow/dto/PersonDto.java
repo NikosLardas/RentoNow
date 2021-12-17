@@ -2,7 +2,9 @@ package com.bead.rentonow.dto;
 
 import com.bead.rentonow.model.Person;
 import com.bead.rentonow.model.Role;
+import lombok.Data;
 
+@Data
 public class PersonDto {
 
     private Long id;

@@ -31,7 +31,7 @@ public class BookingDto {
         booking.setBookingEndDate(bookingEndDate);
         booking.setIsPaid(isPaid);
 
-        // Missing property and guest back mapping
+        // Need to double map (for property and guest) to this inside the Service
 
         return booking;
     }

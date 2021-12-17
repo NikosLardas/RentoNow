@@ -2,7 +2,6 @@ package com.bead.rentonow.dto;
 
 import com.bead.rentonow.model.Property;
 import lombok.Data;
-
 import java.math.BigDecimal;
 
 @Data

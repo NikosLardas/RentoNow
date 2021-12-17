@@ -35,6 +35,7 @@ public class PropertyInfoDto {
         hostName = property.getHost().getFullName();
     }
 
+    //mappings
     public Property getProperty() {
         Property property = new Property();
         property.setId(id);
@@ -45,8 +46,6 @@ public class PropertyInfoDto {
         property.setAvailableStartDate(availableStartDate);
         property.setAvailableEndDate(availableEndDate);
         property.setImageBlob(convertByteArrayToBlob(image));
-
-        // Missing host back mapping
 
         return property;
     }
