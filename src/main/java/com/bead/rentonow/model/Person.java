@@ -14,6 +14,8 @@ public class Person {
 
     private Role role;
     private String fullName;
+    private String username;
+    private char[] password;
 
     @OneToMany(mappedBy = "host")
     private List<Property> properties;

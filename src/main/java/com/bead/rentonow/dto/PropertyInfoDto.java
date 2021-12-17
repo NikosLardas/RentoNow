@@ -1,9 +1,7 @@
 package com.bead.rentonow.dto;
 
-import com.bead.rentonow.model.Person;
 import com.bead.rentonow.model.Property;
 import lombok.Data;
-
 import javax.sql.rowset.serial.SerialBlob;
 import java.math.BigDecimal;
 import java.sql.Blob;
@@ -24,7 +22,7 @@ public class PropertyInfoDto {
     private byte[] image;
     private String hostName;
 
-    public PropertyInfoDto(Property property, Person person) {
+    public PropertyInfoDto(Property property) {
         id = property.getId();
         title = property.getTitle();
         price = property.getPrice();
@@ -34,7 +32,7 @@ public class PropertyInfoDto {
         availableStartDate = property.getAvailableStartDate();
         availableEndDate = property.getAvailableEndDate();
         image = convertBlobToByteArray(property.getImageBlob());
-        hostName = person.getFullName();
+        hostName = property.getHost().getFullName();
     }
 
     public Property getProperty() {
@@ -47,7 +45,8 @@ public class PropertyInfoDto {
         property.setAvailableStartDate(availableStartDate);
         property.setAvailableEndDate(availableEndDate);
         property.setImageBlob(convertByteArrayToBlob(image));
-        property.getHost().setFullName(hostName);       // Missing data. Need to Re-check
+
+        // Missing host back mapping
 
         return property;
     }

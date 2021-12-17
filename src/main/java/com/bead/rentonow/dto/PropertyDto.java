@@ -1,12 +1,11 @@
 package com.bead.rentonow.dto;
 
-import com.bead.rentonow.model.Person;
 import com.bead.rentonow.model.Property;
+import lombok.Data;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.Date;
 
+@Data
 public class PropertyDto {
 
     private Long id;

@@ -1,10 +1,7 @@
 package com.bead.rentonow.dto;
 
 import com.bead.rentonow.model.Booking;
-import com.bead.rentonow.model.Person;
-import com.bead.rentonow.model.Property;
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
@@ -17,13 +14,13 @@ public class BookingDto {
     private String propertyTitle;
     private String guestName;
 
-    public BookingDto(Booking booking, Property property, Person person) {
+    public BookingDto(Booking booking) {
         id = booking.getId();
         bookingStartDate = booking.getBookingStartDate();
         bookingEndDate = booking.getBookingEndDate();
         isPaid = booking.getIsPaid();
-        propertyTitle = property.getTitle();
-        guestName = person.getFullName();
+        propertyTitle = booking.getProperty().getTitle();
+        guestName = booking.getGuest().getFullName();
     }
 
     //mappings
@@ -33,8 +30,8 @@ public class BookingDto {
         booking.setBookingStartDate(bookingStartDate);
         booking.setBookingEndDate(bookingEndDate);
         booking.setIsPaid(isPaid);
-        booking.getProperty().setTitle(propertyTitle);      // Missing data. Need to Re-check
-        booking.getGuest().setFullName(guestName);          // Missing data. Need to Re-check
+
+        // Missing property and guest back mapping
 
         return booking;
     }
