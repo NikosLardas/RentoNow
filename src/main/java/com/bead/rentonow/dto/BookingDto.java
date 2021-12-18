@@ -31,8 +31,6 @@ public class BookingDto {
         booking.setBookingEndDate(bookingEndDate);
         booking.setIsPaid(isPaid);
 
-        // Need to double map (for property and guest) to this inside the Service
-
         return booking;
     }
 }
