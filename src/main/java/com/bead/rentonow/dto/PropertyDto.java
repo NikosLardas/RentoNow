@@ -19,7 +19,7 @@ public class PropertyDto {
         description = property.getDescription();
     }
 
-    //mappings
+    //mappings - MIGHT BE OBSOLETE
     public Property getProperty() {
         Property property = new Property();
         property.setId(id);

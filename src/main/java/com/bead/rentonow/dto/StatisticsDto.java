@@ -6,10 +6,10 @@ import lombok.Data;
 public class StatisticsDto {
 
     private int numberOfBookings;
-    private String guestName;
+    private String entityName;
 
     public StatisticsDto(int bookingsCount, String name) {
         numberOfBookings = bookingsCount;
-        guestName = name;
+        entityName = name;
     }
 }

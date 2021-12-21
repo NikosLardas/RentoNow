@@ -25,7 +25,7 @@ public class PropertyServiceImpl implements PropertyService {
         this.personRepository = personRepository;
     }
 
-    // get all properties (with less details)
+    // get all properties (with fewer details)
     @Override
     public ApiResponse<List<PropertyDto>> read() {
         return new ApiResponse<List<PropertyDto>>(200, "ok", propertyRepository
@@ -37,13 +37,13 @@ public class PropertyServiceImpl implements PropertyService {
 
     // get one property (with all details)
     @Override
-    public ApiResponse<PropertyInfoDto> read(Long id) {
+    public ApiResponse<PropertyInfoDto> read(Long id){
         Optional<Property> oProperty = propertyRepository.findById(id);
         if (oProperty.isPresent())
-            return new ApiResponse<PropertyInfoDto>(201, "ok",
-                    new PropertyInfoDto(oProperty.get()));
-        else
-            return new ApiResponse<PropertyInfoDto>(400, "not found", null);
+        return new ApiResponse<PropertyInfoDto>(201, "ok",
+                   new PropertyInfoDto(oProperty.get()));
+
+        return new ApiResponse<PropertyInfoDto>(400, "not found", null);
     }
 
     // create one property
