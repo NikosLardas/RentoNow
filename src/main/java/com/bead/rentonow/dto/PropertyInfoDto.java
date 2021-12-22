@@ -1,6 +1,7 @@
 package com.bead.rentonow.dto;
 
 import com.bead.rentonow.model.Property;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.sql.rowset.serial.SerialBlob;
 import java.math.BigDecimal;
@@ -36,6 +37,7 @@ public class PropertyInfoDto {
     }
 
     //mappings
+    @JsonIgnore
     public Property getProperty() {
         Property property = new Property();
         property.setId(id);

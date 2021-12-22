@@ -1,6 +1,7 @@
 package com.bead.rentonow.dto;
 
 import com.bead.rentonow.model.Booking;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public class BookingDto {
     }
 
     //mappings
+    @JsonIgnore
     public Booking getBooking() {
         Booking booking = new Booking();
         booking.setId(id);
