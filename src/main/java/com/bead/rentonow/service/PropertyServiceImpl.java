@@ -39,10 +39,10 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public ApiResponse<PropertyInfoDto> read(Long id){
         Optional<Property> oProperty = propertyRepository.findById(id);
-        if (oProperty.isPresent())
-        return new ApiResponse<PropertyInfoDto>(201, "ok",
-                   new PropertyInfoDto(oProperty.get()));
-
+        if (oProperty.isPresent()) {
+            return new ApiResponse<PropertyInfoDto>(201, "ok",
+                    new PropertyInfoDto(oProperty.get()));
+        }
         return new ApiResponse<PropertyInfoDto>(400, "not found", null);
     }
 

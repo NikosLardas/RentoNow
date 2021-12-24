@@ -48,11 +48,7 @@ public class RentoNowController {
         return propertyService.create(property,personId);
     }
 
-    /*
-    PUT??
-
-    DELETE??
-    */
+    ////
 
     @GetMapping("person")
     public ApiResponse<List<PersonDto>> getPeople() {
@@ -66,13 +62,7 @@ public class RentoNowController {
         return personService.create(person);
     }
 
-    /*
-    READ ONE??
-
-    PUT??
-
-    DELETE??
-    */
+    ////
 
     @GetMapping("booking")
     public ApiResponse<List<BookingDto>> getBookings() {
@@ -94,9 +84,9 @@ public class RentoNowController {
     }
 
     /*
-    PUT??
 
-    DELETE??
+    IMPLEMENT DELETE
+
     */
 
     // NEEDS IMPLEMENTATION

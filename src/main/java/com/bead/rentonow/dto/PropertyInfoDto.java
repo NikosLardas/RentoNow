@@ -32,7 +32,7 @@ public class PropertyInfoDto {
         contactInfo = property.getContactInfo();
         availableStartDate = property.getAvailableStartDate();
         availableEndDate = property.getAvailableEndDate();
-        image = convertBlobToByteArray(property.getImageBlob());
+        //image = convertBlobToByteArray(property.getImageBlob());
         hostName = property.getHost().getFullName();
     }
 
@@ -47,11 +47,12 @@ public class PropertyInfoDto {
         property.setContactInfo(contactInfo);
         property.setAvailableStartDate(availableStartDate);
         property.setAvailableEndDate(availableEndDate);
-        property.setImageBlob(convertByteArrayToBlob(image));
+        //property.setImageBlob(convertByteArrayToBlob(image));
 
         return property;
     }
 
+    /*
     private byte[] convertBlobToByteArray(Blob blob) {
         try {
             return blob.getBytes(1, (int) blob.length());
@@ -69,4 +70,5 @@ public class PropertyInfoDto {
             return null;
         }
     }
+    */
 }
