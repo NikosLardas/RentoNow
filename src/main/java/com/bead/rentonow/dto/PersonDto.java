@@ -13,15 +13,18 @@ public class PersonDto {
     private Long id;
     private Role role;
     private String fullName;
-    @JsonIgnore
     private String username;
-    @JsonIgnore
     private char[] password;
+    @JsonIgnore
+    private final String notVisible = "Sorry, that's a secret!";
 
     public PersonDto(Person person) {
         id = person.getId();
         role = person.getRole();
         fullName = person.getFullName();
+        username = notVisible;
+        password = notVisible.toCharArray();
+
     }
 
     //mappings

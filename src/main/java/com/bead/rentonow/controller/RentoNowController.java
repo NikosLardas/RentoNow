@@ -83,16 +83,14 @@ public class RentoNowController {
         return bookingService.create(booking,propertyId,personId);
     }
 
-    /*
+    @DeleteMapping("booking/{id}")
+    public ApiResponse<Boolean> delete(@PathVariable long id) {
+        return bookingService.delete(id);
+    }
 
-    IMPLEMENT DELETE
-
-    */
-
-    // NEEDS IMPLEMENTATION
     @GetMapping("statistics/{type}")
-    public ApiResponse<List<StatisticsDto>> getStatistics() {
+    public ApiResponse<List<StatisticsDto>> getStatistics(@PathVariable String type) {
 
-        return null;
+        return bookingService.getStatistics(type);
     }
 }

@@ -40,8 +40,7 @@ public class PropertyServiceImpl implements PropertyService {
     public ApiResponse<PropertyInfoDto> read(Long id){
         Optional<Property> oProperty = propertyRepository.findById(id);
         if (oProperty.isPresent()) {
-            return new ApiResponse<PropertyInfoDto>(201, "ok",
-                    new PropertyInfoDto(oProperty.get()));
+            return new ApiResponse<PropertyInfoDto>(200, "ok", new PropertyInfoDto(oProperty.get()));
         }
         return new ApiResponse<PropertyInfoDto>(400, "not found", null);
     }
@@ -50,13 +49,13 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public ApiResponse<PropertyInfoDto> create(PropertyInfoDto propertyInfoDto, Long personId) throws PersonNotFoundException {
         Optional<Person> oPerson = personRepository.findById(personId);
-        if (!oPerson.isPresent())
-            throw new PersonNotFoundException("Person with ID: "+personId +" not found !");
+        if (!oPerson.isPresent()) {
+            throw new PersonNotFoundException("Person with ID: " + personId + " not found !");
+        }
 
         Property property = propertyInfoDto.getProperty();
         property.setHost(oPerson.get());
 
-        return new ApiResponse<PropertyInfoDto>(201,"ok",
-                new PropertyInfoDto(propertyRepository.save(property)));
+        return new ApiResponse<PropertyInfoDto>(201,"ok", new PropertyInfoDto(propertyRepository.save(property)));
     }
 }

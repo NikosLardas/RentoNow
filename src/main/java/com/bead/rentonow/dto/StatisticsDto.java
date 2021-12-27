@@ -5,11 +5,12 @@ import lombok.Data;
 @Data
 public class StatisticsDto {
 
-    private int numberOfBookings;
-    private String entityName;
 
-    public StatisticsDto(int bookingsCount, String name) {
-        numberOfBookings = bookingsCount;
+    private String entityName;
+    private long numberOfBookings;
+
+    public StatisticsDto(String name, long bookingsCount) {
         entityName = name;
+        numberOfBookings = bookingsCount;
     }
 }

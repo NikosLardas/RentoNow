@@ -30,7 +30,6 @@ public class PersonServiceImpl implements PersonService {
     // create a person
     @Override
     public ApiResponse<PersonDto> create(PersonDto personDto) {
-        return new ApiResponse<PersonDto>(200, "ok",
-                new PersonDto(personRepository.save(personDto.getPerson())));
+        return new ApiResponse<PersonDto>(200, "ok", new PersonDto(personRepository.save(personDto.getPerson())));
     }
 }

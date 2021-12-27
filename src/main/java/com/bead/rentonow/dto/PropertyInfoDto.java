@@ -3,6 +3,8 @@ package com.bead.rentonow.dto;
 import com.bead.rentonow.model.Property;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.sql.rowset.serial.SerialBlob;
 import java.math.BigDecimal;
 import java.sql.Blob;
@@ -10,6 +12,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 public class PropertyInfoDto {
 
     private Long id;
@@ -42,6 +45,7 @@ public class PropertyInfoDto {
         Property property = new Property();
         property.setId(id);
         property.setTitle(title);
+        property.setPrice(price);
         property.setDescription(description);
         property.setLocation(location);
         property.setContactInfo(contactInfo);
