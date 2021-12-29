@@ -4,7 +4,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Blob;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -20,8 +20,8 @@ public class Property {
     private String description;
     private String location;
     private String contactInfo;
-    private Date availableStartDate;
-    private Date availableEndDate;
+    private LocalDate availableStartDate;
+    private LocalDate availableEndDate;
 
     // Image possibly as a BLOB. Needs re-check/
     @Lob

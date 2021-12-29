@@ -30,6 +30,13 @@ public class PersonServiceImpl implements PersonService {
     // create a person
     @Override
     public ApiResponse<PersonDto> create(PersonDto personDto) {
-        return new ApiResponse<PersonDto>(200, "ok", new PersonDto(personRepository.save(personDto.getPerson())));
+        ApiResponse<PersonDto> responsePerson;
+
+        if (personDto.getRole() == null) {
+            responsePerson = new ApiResponse<PersonDto>(401, "no role was provided", null);
+        } else {
+            responsePerson = new ApiResponse<PersonDto>(200, "ok", new PersonDto(personRepository.save(personDto.getPerson())));
+        }
+        return responsePerson;
     }
 }

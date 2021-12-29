@@ -9,7 +9,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import java.math.BigDecimal;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -21,8 +21,8 @@ public class PropertyInfoDto {
     private String description;
     private String location;
     private String contactInfo;
-    private Date availableStartDate;
-    private Date availableEndDate;
+    private LocalDate availableStartDate;
+    private LocalDate availableEndDate;
     private byte[] image;
     private String hostName;
 

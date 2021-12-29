@@ -2,7 +2,7 @@ package com.bead.rentonow.model;
 
 import lombok.Data;
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -12,8 +12,8 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date bookingStartDate;
-    private Date bookingEndDate;
+    private LocalDate bookingStartDate;
+    private LocalDate bookingEndDate;
     private int isPaid;
 
     @ManyToOne
