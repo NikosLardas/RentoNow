@@ -7,8 +7,11 @@ import com.bead.rentonow.front.ApiResponse;
 import com.bead.rentonow.service.PersonService;
 import com.bead.rentonow.service.PropertyService;
 import com.bead.rentonow.service.BookingService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -31,8 +34,15 @@ public class RentoNowController {
 
     @GetMapping("property")
     public ApiResponse<List<PropertyDto>> getProperties() {
+            return propertyService.read();
+    }
 
-        return propertyService.read();
+    @GetMapping("property/filter")
+    public ApiResponse<List<PropertyDto>> getPropertiesWithFilters(@RequestParam String location, @RequestParam BigDecimal price,
+                                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+
+            return propertyService.readWithFilters(location,price,startDate,endDate);
     }
 
     @GetMapping("property/{id}")

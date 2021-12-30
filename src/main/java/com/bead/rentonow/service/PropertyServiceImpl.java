@@ -10,6 +10,8 @@ import com.bead.rentonow.repository.PersonRepository;
 import com.bead.rentonow.repository.PropertyRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,6 +35,21 @@ public class PropertyServiceImpl implements PropertyService {
                 .stream()
                 .map(PropertyDto::new)
                 .collect(Collectors.toList()));
+    }
+
+    // get all filtered properties (with fewer details)
+    @Override
+    public ApiResponse<List<PropertyDto>> readWithFilters(String location, BigDecimal price, LocalDate startDate, LocalDate endDate) {
+
+        if(endDate.isAfter(startDate)) {
+            return new ApiResponse<List<PropertyDto>>(200, "ok", propertyRepository
+                    .getPropertiesFiltered(location, price, startDate, endDate)
+                    .stream()
+                    .map(PropertyDto::new)
+                    .collect(Collectors.toList()));
+        } else {
+            return new ApiResponse<List<PropertyDto>>(400, "wrong dates inserted", null);
+        }
     }
 
     // get one property (with all details)
