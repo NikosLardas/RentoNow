@@ -63,11 +63,33 @@ public class BookingServiceImpl implements BookingService {
         else if (!oPerson.isPresent())
             throw new PersonNotFoundException("Person with ID: "+personId +" not found !");
 
-        Booking booking = bookingDto.getBooking();
-        booking.setProperty(oProperty.get());
-        booking.setGuest(oPerson.get());
+        ApiResponse<BookingDto> responseBooking;
 
-        return new ApiResponse<BookingDto>(201,"ok", new BookingDto(bookingRepository.save(booking)));
+        if(bookingDto==null) {
+            responseBooking =  new ApiResponse<BookingDto>(400, "booking is null", null);
+        } else if(bookingDto.getBookingStartDate() == null) {
+            responseBooking =  new ApiResponse<BookingDto>(401, "booking start date is null", null);
+        } else if(bookingDto.getBookingEndDate() == null) {
+            responseBooking =  new ApiResponse<BookingDto>(401, "booking end date is null", null);
+        } else if(!bookingDto.getBookingEndDate().isAfter(bookingDto.getBookingStartDate())) {
+            responseBooking =  new ApiResponse<BookingDto>(402, "booking end date needs to be bigger than booking start date", null);
+        } else if(!bookingDto.isPaid()) {
+            responseBooking = new ApiResponse<BookingDto>(402, "booking is not paid", null);
+        }
+        else {
+            try {
+                Booking booking = bookingDto.getBooking();
+                booking.setProperty(oProperty.get());
+                booking.setGuest(oPerson.get());
+
+                responseBooking = new ApiResponse<BookingDto>(201, "ok", new BookingDto(bookingRepository.save(booking)));
+            } catch (Exception e) {
+                responseBooking = new ApiResponse<BookingDto>(403,
+                        "the booking was not saved", null);
+            }
+        }
+
+        return responseBooking;
     }
 
     // Delete a booking
