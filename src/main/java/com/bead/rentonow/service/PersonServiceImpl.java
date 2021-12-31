@@ -32,9 +32,18 @@ public class PersonServiceImpl implements PersonService {
     public ApiResponse<PersonDto> create(PersonDto personDto) {
         ApiResponse<PersonDto> responsePerson;
 
-        if (personDto.getRole() == null) {
+        if (personDto.getFullName() == null) {
+            responsePerson = new ApiResponse<PersonDto>(401, "no full name was provided", null);
+        } else if (personDto.getRole() == null) {
             responsePerson = new ApiResponse<PersonDto>(401, "no role was provided", null);
-        } else {
+        } else if (personDto.getUsername() == null) {
+            responsePerson = new ApiResponse<PersonDto>(401, "no username was provided", null);
+        } else if (personDto.getPassword() == null) {
+            responsePerson = new ApiResponse<PersonDto>(401, "no password was provided", null);
+        } else if (personRepository.findPersonByUsername(personDto.getUsername()).isPresent()) {
+            responsePerson = new ApiResponse<PersonDto>(402, "username: " +personDto.getUsername() +" , already exists ", null);
+        }
+        else {
             responsePerson = new ApiResponse<PersonDto>(200, "ok", new PersonDto(personRepository.save(personDto.getPerson())));
         }
         return responsePerson;
