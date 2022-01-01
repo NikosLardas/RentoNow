@@ -4,6 +4,7 @@ package com.bead.rentonow.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,6 +21,9 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // Disable csrf
+        http.csrf().disable();
+
         http
                 .httpBasic()
                 .and()
@@ -33,58 +37,66 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/ping")
+                .antMatchers(HttpMethod.GET,"/ping")
                 .permitAll()
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/property/filter")
+                .antMatchers(HttpMethod.GET,"/property/filter")
                 .hasAnyRole("ADMIN","GUEST")
+
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/property/{id}")
+                .antMatchers(HttpMethod.GET,"/property/{id}")
                 .hasAnyRole("ADMIN","GUEST")
+
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/property/{personId}")
+                .antMatchers(HttpMethod.POST,"/property/{personId}")
                 .hasRole("HOST")
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/property/{propertyId}/person/{personId}/image")
+                .antMatchers(HttpMethod.POST,"/property/{propertyId}/person/{personId}/image")
                 .hasRole("HOST")
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/property")
+                .antMatchers(HttpMethod.GET,"/property")
                 .hasAnyRole("ADMIN","GUEST")
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/person")
+                .antMatchers(HttpMethod.GET,"/person")
                 .hasRole("ADMIN")
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/booking/{id}")
+                .antMatchers(HttpMethod.POST,"/person")
+                .hasRole("ADMIN")
+
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET,"/booking/{id}")
                 .permitAll()
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/booking/property/{propertyId}/person/{personId}")
+                .antMatchers(HttpMethod.POST,"/booking/property/{propertyId}/person/{personId}")
                 .hasAnyRole("ADMIN","GUEST")
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/statistics/{type}")
+                .antMatchers(HttpMethod.GET,"/booking")
                 .hasAnyRole("ADMIN")
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/booking")
+                .antMatchers(HttpMethod.GET,"/statistics/{type}")
                 .hasAnyRole("ADMIN")
+
 
                 .anyRequest()
                 .authenticated() ;

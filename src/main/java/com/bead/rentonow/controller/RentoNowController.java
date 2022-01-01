@@ -63,8 +63,7 @@ public class RentoNowController {
     public ApiResponse<PropertyInfoDto> updateProperty(@RequestParam MultipartFile image, @PathVariable long propertyId,
                                                        @PathVariable long personId) throws PropertyNotFoundException {
 
-        //return propertyService.update(image, propertyId, personId);
-        return new ApiResponse<PropertyInfoDto>(400, "temporary", null);
+        return propertyService.update(image, propertyId, personId);
     }
 
     // Person Endpoints
