@@ -1,20 +1,21 @@
 package com.bead.rentonow.dto;
 
 import com.bead.rentonow.model.Person;
-import com.bead.rentonow.model.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Data
 @NoArgsConstructor
 public class PersonDto {
 
     private Long id;
-    private Role role;
+    private String role;
     private String fullName;
     private String username;
-    private char[] password;
+    private String password;
+    private boolean enabled;
     @JsonIgnore
     private final String notVisible = "Sorry, that's a secret!";
 
@@ -23,7 +24,8 @@ public class PersonDto {
         role = person.getRole();
         fullName = person.getFullName();
         username = notVisible;
-        password = notVisible.toCharArray();
+        password = notVisible;
+        enabled = person.isEnabled();
 
     }
 
@@ -35,7 +37,8 @@ public class PersonDto {
         person.setRole(role);
         person.setFullName(fullName);
         person.setUsername(username);
-        person.setPassword(password);
+        person.setPassword(new BCryptPasswordEncoder().encode(password));
+        person.setEnabled(enabled);
 
         return person;
     }

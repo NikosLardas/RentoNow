@@ -5,7 +5,6 @@ import lombok.Data;
 @Data
 public class StatisticsDto {
 
-
     private String entityName;
     private long numberOfBookings;
 

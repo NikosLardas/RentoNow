@@ -22,7 +22,7 @@ public class BookingDto {
         id = booking.getId();
         bookingStartDate = booking.getBookingStartDate();
         bookingEndDate = booking.getBookingEndDate();
-        isPaid = booking.getIsPaid() != 0;
+        isPaid = booking.isPaid();
         propertyTitle = booking.getProperty().getTitle();
         guestName = booking.getGuest().getFullName();
     }
@@ -34,7 +34,7 @@ public class BookingDto {
         booking.setId(id);
         booking.setBookingStartDate(bookingStartDate);
         booking.setBookingEndDate(bookingEndDate);
-        booking.setIsPaid(isPaid? 1 : 0);
+        booking.setPaid(isPaid);
         return booking;
     }
 }

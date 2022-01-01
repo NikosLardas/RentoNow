@@ -26,7 +26,7 @@ class PersonServiceImplTest {
         PersonDto person = new PersonDto();
         person.setFullName("Test Person");
         person.setUsername("testPerson");
-        person.setPassword(password.toCharArray());
+        person.setPassword(password);
 
         ApiResponse<PersonDto> result = personService.create(person);
 

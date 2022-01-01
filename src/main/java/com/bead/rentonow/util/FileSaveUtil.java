@@ -1,4 +1,4 @@
-package com.bead.rentonow.file;
+package com.bead.rentonow.util;
 
 import java.io.*;
 import java.nio.file.*;

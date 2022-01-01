@@ -32,7 +32,7 @@ public class RentoNowControllerTest {
     @DisplayName("Test for the number of users")
     public void usersShouldBeAtLeastOneAdmin() throws Exception {
 
-        ApiResponse<List<PersonDto>> response = this.restTemplate.getForObject("http://localhost:" + port + "/person", ApiResponse.class);
+        ApiResponse<List<PersonDto>> response = this.restTemplate.withBasicAuth("admin","admin@123").getForObject("http://localhost:" + port + "/person", ApiResponse.class);
 
         List<PersonDto> currentUsers = response.getData();
 

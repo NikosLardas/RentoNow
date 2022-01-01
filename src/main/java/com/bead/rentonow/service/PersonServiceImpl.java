@@ -42,10 +42,13 @@ public class PersonServiceImpl implements PersonService {
             responsePerson = new ApiResponse<PersonDto>(401, "no password was provided", null);
         } else if (personRepository.findPersonByUsername(personDto.getUsername()).isPresent()) {
             responsePerson = new ApiResponse<PersonDto>(402, "username: " +personDto.getUsername() +" , already exists ", null);
+        } else if (!roles.contains(personDto.getRole())) {
+            responsePerson = new ApiResponse<PersonDto>(401, personDto.getRole() + " is not a valid role", null);
         }
         else {
             responsePerson = new ApiResponse<PersonDto>(200, "ok", new PersonDto(personRepository.save(personDto.getPerson())));
         }
+
         return responsePerson;
     }
 }

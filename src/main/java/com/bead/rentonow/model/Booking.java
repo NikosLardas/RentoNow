@@ -14,7 +14,7 @@ public class Booking {
 
     private LocalDate bookingStartDate;
     private LocalDate bookingEndDate;
-    private int isPaid;
+    private boolean isPaid;
 
     @ManyToOne
     private Property property;

@@ -12,10 +12,11 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Role role;
+    private String role;
     private String fullName;
     private String username;
-    private char[] password;
+    private String password;
+    private boolean enabled;
 
     @OneToMany(mappedBy = "host")
     private List<Property> properties;

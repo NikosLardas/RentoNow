@@ -32,6 +32,8 @@ public class RentoNowController {
         return "The API is working";
     }
 
+    // Property Endpoints
+
     @GetMapping("property")
     public ApiResponse<List<PropertyDto>> getProperties() {
             return propertyService.read();
@@ -51,21 +53,21 @@ public class RentoNowController {
         return propertyService.read(id);
     }
 
-
     @PostMapping("property/{personId}")
     public ApiResponse<PropertyInfoDto> createProperty(@PathVariable long personId, @RequestBody PropertyInfoDto property)  throws PersonNotFoundException {
 
         return propertyService.create(property, personId);
     }
 
-    @PatchMapping("property/{propertyId}/person/{personId}")
+    @PatchMapping("property/{propertyId}/person/{personId}/image")
     public ApiResponse<PropertyInfoDto> updateProperty(@RequestParam MultipartFile image, @PathVariable long propertyId,
                                                        @PathVariable long personId) throws PropertyNotFoundException {
 
-        return propertyService.update(image, propertyId, personId);
+        //return propertyService.update(image, propertyId, personId);
+        return new ApiResponse<PropertyInfoDto>(400, "temporary", null);
     }
 
-    ////
+    // Person Endpoints
 
     @GetMapping("person")
     public ApiResponse<List<PersonDto>> getPeople() {
@@ -79,7 +81,7 @@ public class RentoNowController {
         return personService.create(person);
     }
 
-    ////
+    // Booking Endpoints
 
     @GetMapping("booking")
     public ApiResponse<List<BookingDto>> getBookings() {
