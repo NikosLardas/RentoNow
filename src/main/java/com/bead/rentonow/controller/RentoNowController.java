@@ -9,7 +9,7 @@ import com.bead.rentonow.service.PropertyService;
 import com.bead.rentonow.service.BookingService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -51,11 +51,18 @@ public class RentoNowController {
         return propertyService.read(id);
     }
 
-    @PostMapping("property/{personId}")
-    public ApiResponse<PropertyInfoDto> createProperty(@PathVariable long personId,@RequestBody PropertyInfoDto property)
-    throws PersonNotFoundException{
 
-        return propertyService.create(property,personId);
+    @PostMapping("property/{personId}")
+    public ApiResponse<PropertyInfoDto> createProperty(@PathVariable long personId, @RequestBody PropertyInfoDto property)  throws PersonNotFoundException {
+
+        return propertyService.create(property, personId);
+    }
+
+    @PatchMapping("property/{propertyId}/person/{personId}")
+    public ApiResponse<PropertyInfoDto> updateProperty(@RequestParam MultipartFile image, @PathVariable long propertyId,
+                                                       @PathVariable long personId) throws PropertyNotFoundException {
+
+        return propertyService.update(image, propertyId, personId);
     }
 
     ////
