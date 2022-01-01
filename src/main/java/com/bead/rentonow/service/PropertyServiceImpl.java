@@ -113,10 +113,14 @@ public class PropertyServiceImpl implements PropertyService {
 
     // Update the image of a property
     public ApiResponse<PropertyInfoDto> update(MultipartFile file, Long propertyId, Long personId) throws PropertyNotFoundException {
+        Property property;
         Optional<Property> oProperty = propertyRepository.findById(propertyId);
 
         if (!oProperty.isPresent()) {
             throw new PropertyNotFoundException("Property with ID: "+propertyId +" not found !");
+        }
+        else {
+            property = oProperty.get();
         }
 
         ApiResponse<PropertyInfoDto> responseProperty;
@@ -127,11 +131,12 @@ public class PropertyServiceImpl implements PropertyService {
         else {
             try {
                 String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-                String saveDir = "images/" + oProperty.get().getId();
-                oProperty.get().setImage(fileName);
-                responseProperty = new ApiResponse<PropertyInfoDto>(201, "ok", new PropertyInfoDto(propertyRepository.save(oProperty.get())));
+                property.setImage(fileName);
 
-                FileSaveUtil.saveFile("images/" + oProperty.get(), fileName, file);
+                responseProperty = new ApiResponse<PropertyInfoDto>(201, "ok", new PropertyInfoDto(propertyRepository.save(property)));
+
+                String saveDir = System.getProperty("user.dir") + "\\src\\main\\resources\\images\\" +property.getId().toString();
+                FileSaveUtil.saveFile(saveDir, fileName, file);
             } catch (Exception e) {
                 responseProperty = new ApiResponse<PropertyInfoDto>(403,
                         "the property was not saved", null);
