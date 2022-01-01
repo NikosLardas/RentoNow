@@ -1,16 +1,18 @@
 package com.bead.rentonow.service;
 
-import com.bead.rentonow.dto.BookingDto;
 import com.bead.rentonow.dto.PropertyDto;
 import com.bead.rentonow.dto.PropertyInfoDto;
 import com.bead.rentonow.exception.PersonNotFoundException;
+import com.bead.rentonow.exception.PropertyNotFoundException;
+import com.bead.rentonow.file.FileSaveUtil;
 import com.bead.rentonow.front.ApiResponse;
 import com.bead.rentonow.model.Person;
 import com.bead.rentonow.model.Property;
 import com.bead.rentonow.repository.PersonRepository;
 import com.bead.rentonow.repository.PropertyRepository;
 import org.springframework.stereotype.Service;
-
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -97,8 +99,39 @@ public class PropertyServiceImpl implements PropertyService {
             try {
                 Property property = propertyInfoDto.getProperty();
                 property.setHost(oPerson.get());
+                property.setImage("no image");
 
                 responseProperty = new ApiResponse<PropertyInfoDto>(201, "ok", new PropertyInfoDto(propertyRepository.save(property)));
+            } catch (Exception e) {
+                responseProperty = new ApiResponse<PropertyInfoDto>(403,
+                        "the property was not saved", null);
+            }
+        }
+
+        return responseProperty;
+    }
+
+    // Update the image of a property
+    public ApiResponse<PropertyInfoDto> update(MultipartFile file, Long propertyId, Long personId) throws PropertyNotFoundException {
+        Optional<Property> oProperty = propertyRepository.findById(propertyId);
+
+        if (!oProperty.isPresent()) {
+            throw new PropertyNotFoundException("Property with ID: "+propertyId +" not found !");
+        }
+
+        ApiResponse<PropertyInfoDto> responseProperty;
+
+        if (file == null) {
+            responseProperty = new ApiResponse<PropertyInfoDto>(402, "no image selected", null);
+        }
+        else {
+            try {
+                String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+                String saveDir = "images/" + oProperty.get().getId();
+                oProperty.get().setImage(fileName);
+                responseProperty = new ApiResponse<PropertyInfoDto>(201, "ok", new PropertyInfoDto(propertyRepository.save(oProperty.get())));
+
+                FileSaveUtil.saveFile("images/" + oProperty.get(), fileName, file);
             } catch (Exception e) {
                 responseProperty = new ApiResponse<PropertyInfoDto>(403,
                         "the property was not saved", null);

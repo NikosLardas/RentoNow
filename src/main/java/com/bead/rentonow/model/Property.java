@@ -3,7 +3,6 @@ package com.bead.rentonow.model;
 import lombok.Data;
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,10 +21,7 @@ public class Property {
     private String contactInfo;
     private LocalDate availableStartDate;
     private LocalDate availableEndDate;
-
-    // Image possibly as a BLOB. Needs re-check/
-    @Lob
-    private Blob imageBlob;
+    private String image;
 
     @ManyToOne
     private Person host;
