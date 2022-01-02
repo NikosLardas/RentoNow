@@ -30,7 +30,7 @@ class PersonServiceImplTest {
 
         ApiResponse<PersonDto> result = personService.create(person);
 
-        assertSame("no role was provided", result.getDescription(), "The description is different from what was expected!");
+        assertSame("person role is null", result.getDescription(), "The description is different from what was expected!");
         assertSame(null, result.getData(),"The data are different from what was expected!");
     }
 }
