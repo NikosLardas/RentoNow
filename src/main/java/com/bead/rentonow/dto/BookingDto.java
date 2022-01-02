@@ -14,7 +14,7 @@ public class BookingDto {
     private Long id;
     private LocalDate bookingStartDate;
     private LocalDate bookingEndDate;
-    private boolean isPaid;
+    private boolean paid;
     private String propertyTitle;
     private String guestName;
 
@@ -22,7 +22,7 @@ public class BookingDto {
         id = booking.getId();
         bookingStartDate = booking.getBookingStartDate();
         bookingEndDate = booking.getBookingEndDate();
-        isPaid = booking.isPaid();
+        paid = booking.isPaid();
         propertyTitle = booking.getProperty().getTitle();
         guestName = booking.getGuest().getFullName();
     }
@@ -34,7 +34,7 @@ public class BookingDto {
         booking.setId(id);
         booking.setBookingStartDate(bookingStartDate);
         booking.setBookingEndDate(bookingEndDate);
-        booking.setPaid(isPaid);
+        booking.setPaid(paid);
         return booking;
     }
 }
