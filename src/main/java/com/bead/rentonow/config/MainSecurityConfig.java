@@ -90,12 +90,12 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/booking")
-                .hasAnyRole("ADMIN")
+                .hasRole("ADMIN")
 
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/statistics/{type}")
-                .hasAnyRole("ADMIN")
+                .hasRole("ADMIN")
 
 
                 .anyRequest()
