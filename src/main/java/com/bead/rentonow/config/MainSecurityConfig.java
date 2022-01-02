@@ -55,12 +55,12 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/property/{personId}")
-                .hasRole("HOST")
+                .hasAnyRole("ADMIN","HOST")
 
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/property/{propertyId}/person/{personId}/image")
-                .hasRole("HOST")
+                .hasAnyRole("ADMIN","HOST")
 
                 .and()
                 .authorizeRequests()
