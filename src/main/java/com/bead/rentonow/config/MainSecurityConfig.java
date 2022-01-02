@@ -80,7 +80,7 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/booking/{id}")
-                .permitAll()
+                .hasAnyRole("ADMIN","GUEST","HOST")
 
                 .and()
                 .authorizeRequests()
