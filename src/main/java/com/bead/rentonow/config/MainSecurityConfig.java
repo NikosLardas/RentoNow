@@ -84,6 +84,11 @@ public class MainSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.DELETE,"/booking/{id}")
+                .hasRole("ADMIN")
+
+                .and()
+                .authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/booking/property/{propertyId}/person/{personId}")
                 .hasAnyRole("ADMIN","GUEST")
 
