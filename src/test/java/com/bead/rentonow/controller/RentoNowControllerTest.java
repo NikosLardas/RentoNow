@@ -32,11 +32,11 @@ public class RentoNowControllerTest {
     @DisplayName("Test for the number of users")
     public void usersShouldBeAtLeastOneAdmin() throws Exception {
 
-        ApiResponse<List<PersonDto>> response = this.restTemplate.withBasicAuth("admin","admin@123").getForObject("http://localhost:" + port + "/person", ApiResponse.class);
+        ApiResponse<List<PersonDto>> response = this.restTemplate.withBasicAuth("MainAdmin","mainAdminPassword").getForObject("http://localhost:" + port + "/person", ApiResponse.class);
 
         List<PersonDto> currentUsers = response.getData();
 
         assertNotNull(currentUsers);
-        assertTrue(currentUsers.size() >= 1, "At least an admin user should exist in the application!");
+        assertTrue(currentUsers.size() >= 1, "At least one admin user should exist in the application!");
     }
 }
