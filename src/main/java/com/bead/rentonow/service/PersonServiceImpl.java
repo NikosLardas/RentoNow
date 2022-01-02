@@ -32,21 +32,28 @@ public class PersonServiceImpl implements PersonService {
     public ApiResponse<PersonDto> create(PersonDto personDto) {
         ApiResponse<PersonDto> responsePerson;
 
-        if (personDto.getFullName() == null) {
-            responsePerson = new ApiResponse<PersonDto>(401, "no full name was provided", null);
+        if(personDto==null) {
+            responsePerson = new ApiResponse<PersonDto>(400, "person is null", null);
+        } else if (personDto.getFullName() == null) {
+            responsePerson = new ApiResponse<PersonDto>(401, "person full name is null", null);
         } else if (personDto.getRole() == null) {
-            responsePerson = new ApiResponse<PersonDto>(401, "no role was provided", null);
+            responsePerson = new ApiResponse<PersonDto>(401, "person role is null", null);
         } else if (personDto.getUsername() == null) {
-            responsePerson = new ApiResponse<PersonDto>(401, "no username was provided", null);
+            responsePerson = new ApiResponse<PersonDto>(401, "person username is null", null);
         } else if (personDto.getPassword() == null) {
-            responsePerson = new ApiResponse<PersonDto>(401, "no password was provided", null);
+            responsePerson = new ApiResponse<PersonDto>(401, "person password is null", null);
         } else if (personRepository.findPersonByUsername(personDto.getUsername()).isPresent()) {
-            responsePerson = new ApiResponse<PersonDto>(402, "username: " +personDto.getUsername() +" , already exists ", null);
+            responsePerson = new ApiResponse<PersonDto>(402, "person username: " +personDto.getUsername() +" already exists", null);
         } else if (!roles.contains(personDto.getRole())) {
             responsePerson = new ApiResponse<PersonDto>(401, personDto.getRole() + " is not a valid role", null);
         }
         else {
-            responsePerson = new ApiResponse<PersonDto>(200, "ok", new PersonDto(personRepository.save(personDto.getPerson())));
+            try {
+                responsePerson = new ApiResponse<PersonDto>(200, "ok", new PersonDto(personRepository.save(personDto.getPerson())));
+            } catch (Exception e) {
+                responsePerson = new ApiResponse<PersonDto>(403,
+                        "the person was not saved", null);
+            }
         }
 
         return responsePerson;

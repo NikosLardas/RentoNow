@@ -82,16 +82,20 @@ public class PropertyServiceImpl implements PropertyService {
             responseProperty =  new ApiResponse<PropertyInfoDto>(401, "property title is null", null);
         } else if(propertyInfoDto.getPrice() == null) {
             responseProperty =  new ApiResponse<PropertyInfoDto>(401, "property price is null", null);
-        }  else if(propertyInfoDto.getDescription() == null) {
+        } else if(propertyInfoDto.getDescription() == null) {
             responseProperty =  new ApiResponse<PropertyInfoDto>(401, "property description is null", null);
         } else if(propertyInfoDto.getLocation() == null) {
             responseProperty =  new ApiResponse<PropertyInfoDto>(401, "property location is null", null);
         } else if(propertyInfoDto.getContactInfo() == null) {
             responseProperty =  new ApiResponse<PropertyInfoDto>(401, "property contact info is null", null);
+        } else if(propertyInfoDto.getAvailableStartDate() == null) {
+            responseProperty =  new ApiResponse<PropertyInfoDto>(401, "property start date is null", null);
+        } else if(propertyInfoDto.getAvailableEndDate() == null) {
+            responseProperty = new ApiResponse<PropertyInfoDto>(401, "property end date is null", null);
         } else if(!propertyInfoDto.getAvailableEndDate().isAfter(propertyInfoDto.getAvailableStartDate())) {
             responseProperty =  new ApiResponse<PropertyInfoDto>(402, "property end date needs to be bigger than property start date", null);
         } else if(propertyInfoDto.getPrice().compareTo(BigDecimal.ZERO) == 0 ) {
-            responseProperty =  new ApiResponse<PropertyInfoDto>(402, "property price is zero", null);
+            responseProperty =  new ApiResponse<PropertyInfoDto>(402, "property price can not be zero", null);
         } else if(!isEmail(propertyInfoDto.getContactInfo())) {
             responseProperty =  new ApiResponse<PropertyInfoDto>(402, "property contact info is not an email", null);
         }
@@ -139,7 +143,7 @@ public class PropertyServiceImpl implements PropertyService {
                 FileSaveUtil.saveFile(saveDir, fileName, file);
             } catch (Exception e) {
                 responseProperty = new ApiResponse<PropertyInfoDto>(403,
-                        "the property was not saved", null);
+                        "the property was not updated", null);
             }
         }
 
