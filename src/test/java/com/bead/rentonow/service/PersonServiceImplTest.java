@@ -21,12 +21,11 @@ class PersonServiceImplTest {
 
     @Test
     void testNonCreatingUserWithoutRole() {
-        String password  = "testPassword";
 
         PersonDto person = new PersonDto();
         person.setFullName("Test Person");
         person.setUsername("testPerson");
-        person.setPassword(password);
+        person.setPassword("testPassword");
 
         ApiResponse<PersonDto> result = personService.create(person);
 
